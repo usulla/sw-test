@@ -30,10 +30,11 @@ self.addEventListener('fetch', (event) => {
 });
 
 self.addEventListener('fetch', event => {
-    event.respondWith(
+    event.respondWith( 
         caches.open(CACHE).then(cache => {
-            console.log(cache, 'cache')
             return cache.match(event.request).then(response => {
+                console.log(cache, 'cache')
+                console.log(response, 'response')  
                 return response || fetch(event.request)
                     .then(response => {
                         console.log(response, 'response')
