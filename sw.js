@@ -23,11 +23,27 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
     console.log('sw fetch', event.request);
     event.respondWith(
-      caches.match(event.request).then((response) => {
-        return response || fetch(event.request);
-      })
+        caches.match(event.request).then((response) => {
+            return response || fetch(event.request);
+        })
     );
-  });
+});
+
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        caches.open(CACHE).then(cache => {
+            console.log(cache, 'cache')
+            return cache.match(event.request).then(response => {
+                return response || fetch(event.request)
+                    .then(response => {
+                        console.log(response, 'response')
+                        const responseClone = response.clone();
+                        cache.put(event.request, responseClone);
+                    })
+            })
+        }
+        ))
+})
 // function fromCache(request) {
 //     console.log('take file from caches');
 //     return caches.open(CACHE)
