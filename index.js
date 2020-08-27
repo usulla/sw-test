@@ -6,11 +6,11 @@ if ('serviceWorker' in navigator) {
         .then((reg) => {
             // регистрация сработала
             console.log('Registration succeeded. Scope is ' + reg.scope)
-            navigator.serviceWorker.ready
+            // navigator.serviceWorker.ready
         })
-        .then((worker) => {
-            console.log('syncdata')
-            worker.sync.register('syncdata')
-        })
-        .catch((err) => console.log(err));
+        // .then((worker) => {
+        //     console.log('syncdata')
+        //     worker.sync.register('syncdata')
+        // })
+        .catch((err) => console.log('Registration failed with ' + error));
 }
