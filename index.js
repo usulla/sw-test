@@ -2,7 +2,7 @@
 if ('serviceWorker' in navigator) {
     console.log("SW in browser")
     // Весь код регистрации у нас асинхронный.
-    navigator.serviceWorker.register('/sw-test/sw.js', { scope: './sw-test/' })
+    navigator.serviceWorker.register('/sw-test/sw.js')
         .then((reg) => {
             // регистрация сработала
             console.log('Registration succeeded. Scope is ' + reg.scope)
