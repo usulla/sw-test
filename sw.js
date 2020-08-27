@@ -16,20 +16,27 @@ self.addEventListener('activate', (event) => {
 });
 
 // При запросе на сервер (событие fetch), используем только данные из кэша.
+// self.addEventListener('fetch', (event) => {
+//     console.log('sw fetch', event.request);
+//     event.respondWith(fromCache(event.request))
+// });
 self.addEventListener('fetch', (event) => {
     console.log('sw fetch', event.request);
-    event.respondWith(fromCache(event.request))
-});
-
-function fromCache(request) {
-    console.log('take file from caches');
-    return caches.open(CACHE)
-        .then((cache) => {
-            console.log(cache, 'cache')
-            cache.match(request)
-        })
-        .then((matching) => {
-            console.log(matching, 'matching')
-            matching || Promise.reject('no-match')
-        })
-}
+    event.respondWith(
+      caches.match(event.request).then((response) => {
+        return response || fetch(event.request);
+      })
+    );
+  });
+// function fromCache(request) {
+//     console.log('take file from caches');
+//     return caches.open(CACHE)
+//         .then((cache) => {
+//             console.log(cache, 'cache')
+//             cache.match(request)
+//         })
+//         .then((matching) => {
+//             console.log(matching, 'matching')
+//             matching || Promise.reject('no-match')
+//         })
+// }
