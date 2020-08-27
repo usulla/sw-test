@@ -5,7 +5,7 @@ self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE).then((cache) => {
             return cache.addAll([
-                './sw-test/mus1.mp3'
+                './mus1.mp3'
             ]);
         })
     );
