@@ -1,18 +1,18 @@
 const CACHE = 'cache-only-v1';
 // При установке воркера мы должны закешировать часть данных (статику)
-self.addEventListener('install', (event) => {
-    console.log('sw Установлен')
-    event.waitUntil(
-        caches.open(CACHE).then((cache) => {
-            return cache.addAll([
-                './mus1.mp3'
-            ]);
-        })
-    );
+self.addEventListener('install', event => {
+	console.log('sw Установлен')
+	event.waitUntil(
+		caches.open(CACHE).then(cache => {
+			return cache.addAll([
+				'./mus1.mp3'
+			]);
+		})
+	);
 });
 
-self.addEventListener('activate', (event) => {
-    console.log('sw Активирован');
+self.addEventListener('activate', event => {
+	console.log('sw Активирован');
 });
 
 // При запросе на сервер (событие fetch), используем только данные из кэша.
@@ -20,30 +20,30 @@ self.addEventListener('activate', (event) => {
 //     console.log('sw fetch', event.request);
 //     event.respondWith(fromCache(event.request))
 // });
-self.addEventListener('fetch', (event) => {
-    console.log('sw fetch', event.request);
-    event.respondWith(
-        caches.match(event.request).then((response) => {
-            return response || fetch(event.request);
-        })
-    );
+self.addEventListener('fetch', event => {
+	console.log('sw fetch', event.request);
+	event.respondWith(
+		caches.match(event.request).then(response => {
+			return response || fetch(event.request);
+		})
+	);
 });
 
 self.addEventListener('fetch', event => {
-    event.respondWith( 
-        caches.open(CACHE).then(cache => {
-            return cache.match(event.request).then(response => {
-                console.log(cache, 'cache')
-                console.log(response, 'response')  
-                return response || fetch(event.request)
-                    .then(response => {
-                        console.log(response, 'response')
-                        const responseClone = response.clone();
-                        cache.put(event.request, responseClone);
-                    })
-            })
-        }
-        ))
+	event.respondWith(
+		caches.open(CACHE).then(cache => {
+			return cache.match(event.request).then(response => {
+				console.log(cache, 'cache')
+				console.log(response, 'response')
+				return response || fetch(event.request)
+					.then(response => {
+						console.log(response, 'response')
+						const responseClone = response.clone();
+						cache.put(event.request, responseClone);
+					})
+			})
+		})
+	)
 })
 // function fromCache(request) {
 //     console.log('take file from caches');
