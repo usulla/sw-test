@@ -1,22 +1,33 @@
-<html>
-
-<head>
-    <title>SW2</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="index.js"></script>
-</head>
-<figure id="audioplayer" itemprop="track" itemscope itemtype="http://schema.org/MusicRecording">
-    <figcaption>
-        <div>Track<span itemprop="name">24 Ghosts III</span></div>
-        <div id="album">Album<span itemprop="inAlbum">Ghosts III</span></div>
-        <div id="artist">Artist<span itemprop="byArtist">Nine Inch Nails</span></div>
-        <div id="time">Time<span id="playbacktime">00:00</span></div>
-    </figcaption>
-    <meta itemprop="duration" content="PT2M29S">
-    <div id="fader"></div>
-    <div id="playback"></div>
-    <audio controls src="./mus1.mp3" id="audiotrack" preload="auto"
-        itemprop="audio"></audio>
-</figure>
-
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>SW2</title>
+		<link rel="stylesheet" href="style.css" />
+		<script src="index.js"></script>
+	</head>
+	<figure
+		id="audioplayer"
+		itemprop="track"
+		itemscope
+		itemtype="http://schema.org/MusicRecording"
+	>
+		<figcaption>
+			<div>Track&nbsp;<span itemprop="name">24 Ghosts III</span></div>
+			<div id="album">Album&nbsp;<span itemprop="inAlbum">Ghosts III</span></div>
+			<div id="artist">Artist&nbsp;<span itemprop="byArtist">Nine Inch Nails</span></div>
+			<div id="time">Time&nbsp;<span id="playbacktime">02:39</span></div>
+		</figcaption>
+		<meta itemprop="duration" content="PT2M29S" />
+		<div id="fader"></div>
+		<div id="playback"></div>
+		<audio
+			controls
+			src="./mus1.mp3"
+			id="audiotrack"
+			preload="auto"
+			itemprop="audio"
+		></audio>
+	</figure>
 </html>
